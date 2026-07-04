@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { KnowledgeDocumentData } from '@/types';
 import dynamic from 'next/dynamic';
 import ThemeToggle from '@/components/chat/ThemeToggle';
+import { uploadFileAction } from './actions';
 import styles from './admin.module.css';
 
 // Separate content component to wrap in dynamic import with ssr: false
@@ -143,16 +144,12 @@ function AdminPageContent() {
         formData.append('file', file);
         formData.append('description', description);
 
-        const res = await fetch('/api/knowledge/upload', {
-          method: 'POST',
-          body: formData,
-        });
-        const data = await res.json();
+        const data = await uploadFileAction(formData);
 
         if (data.success) {
           setMessage({
             type: 'success',
-            text: `Archivo "${file.name}" cargado con éxito. Se crearon ${data.document.chunksCount} fragmentos.`,
+            text: `Archivo "${file.name}" cargado con éxito. Se crearon ${data.document?.chunksCount || 0} fragmentos.`,
           });
           setFile(null);
           setDescription('');
