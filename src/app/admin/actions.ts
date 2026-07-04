@@ -6,6 +6,8 @@ import prisma from '@/lib/prisma';
 import * as pdf from 'pdf-parse';
 import { put } from '@vercel/blob';
 
+export const maxDuration = 60; // Allow up to 60 seconds for Vercel (Hobby max)
+
 export async function processUploadedFileAction(url: string, fileName: string, description: string) {
   try {
     if (!url) {
