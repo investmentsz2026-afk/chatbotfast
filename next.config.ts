@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ['pdf-parse'],
   
   // Allow images from any domain (for knowledge base)
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '50mb',
+    },
+  },
   images: {
     remotePatterns: [
       {
