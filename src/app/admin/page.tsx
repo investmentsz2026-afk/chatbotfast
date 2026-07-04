@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { KnowledgeDocumentData } from '@/types';
 import dynamic from 'next/dynamic';
+import ThemeToggle from '@/components/chat/ThemeToggle';
 import styles from './admin.module.css';
 
 // Separate content component to wrap in dynamic import with ssr: false
@@ -37,6 +38,7 @@ function AdminPageContent() {
   
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [confirmModal, setConfirmModal] = useState<{ id: string; title: string } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Prevent hydration mismatch
@@ -205,7 +207,13 @@ function AdminPageContent() {
   };
 
   const handleDelete = async (id: string, docTitle: string) => {
-    if (!confirm(`¿Eliminar el documento "${docTitle}" y todos sus fragmentos?`)) return;
+    setConfirmModal({ id, title: docTitle });
+  };
+
+  const executeDelete = async () => {
+    if (!confirmModal) return;
+    const { id, title: docTitle } = confirmModal;
+    setConfirmModal(null);
 
     try {
       const res = await fetch('/api/knowledge', {
@@ -417,7 +425,8 @@ function AdminPageContent() {
             </a>
           </div>
           
-          <div className={styles.portalHeaderRight}>
+          <div className={styles.portalHeaderRight} style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <ThemeToggle />
             {activeTab === 'knowledge' && (
               <button
                 className={styles.addButtonPortal}
@@ -679,6 +688,51 @@ function AdminPageContent() {
             )}
           </AnimatePresence>
         </main>
+
+        {/* Confirmation Modal */}
+        <AnimatePresence>
+          {confirmModal && (
+            <div className={styles.modalOverlay}>
+              <motion.div
+                className={styles.modalContent}
+                initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                transition={{ duration: 0.15 }}
+              >
+                <div className={styles.modalHeader}>
+                  <div className={styles.modalIcon}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 9v2M12 15h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <h3>Confirmar Eliminación</h3>
+                </div>
+                
+                <div className={styles.modalBody}>
+                  <p>¿Estás seguro de que deseas eliminar el documento <strong>"{confirmModal.title}"</strong> y todos sus fragmentos?</p>
+                  <p className={styles.modalWarning}>Esta acción no se puede deshacer.</p>
+                </div>
+                
+                <div className={styles.modalActions}>
+                  <button 
+                    className={styles.cancelButton} 
+                    onClick={() => setConfirmModal(null)}
+                  >
+                    Cancelar
+                  </button>
+                  <button 
+                    className={styles.confirmDeleteBtn} 
+                    onClick={executeDelete}
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
       </div>
     </div>
   );

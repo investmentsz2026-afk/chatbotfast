@@ -9,6 +9,7 @@ import TypingIndicator from './TypingIndicator';
 import QuickActions from './QuickActions';
 import LocationSelector from './LocationSelector';
 import WelcomeScreen from './WelcomeScreen';
+import ThemeToggle from './ThemeToggle';
 import type { ConversationState, QuickOption, DepartmentData, ProvinceData, DistrictData, PoliceStationData } from '@/types';
 import styles from './ChatInterface.module.css';
 
@@ -290,7 +291,8 @@ export default function ChatInterface() {
             </div>
           </div>
         </div>
-        <div>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <ThemeToggle />
           <a href="/admin" className={styles.adminButton} title="Panel de Administración" id="btn-header-admin">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
