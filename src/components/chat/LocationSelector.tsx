@@ -53,10 +53,18 @@ export default function LocationSelector({
     fetchItems();
   }, [step, departmentId, provinceId]);
 
+  const normalizeString = (str: string) => {
+    return str
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // remove accents/diacritics
+      .trim();
+  };
+
   const filteredItems = useMemo(() => {
     if (!searchQuery.trim()) return items;
-    const q = searchQuery.toLowerCase().trim();
-    return items.filter((item) => item.name.toLowerCase().includes(q));
+    const q = normalizeString(searchQuery);
+    return items.filter((item) => normalizeString(item.name).includes(q));
   }, [items, searchQuery]);
 
   const handleSelect = (item: { id: string; name: string }) => {
