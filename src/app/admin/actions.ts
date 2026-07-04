@@ -4,38 +4,25 @@ import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import prisma from '@/lib/prisma';
 import * as pdf from 'pdf-parse';
+import { put } from '@vercel/blob';
 
-export async function uploadFileAction(formData: FormData) {
+export async function processUploadedFileAction(url: string, fileName: string, description: string) {
   try {
-    const file = formData.get('file') as File | null;
-    const description = formData.get('description') as string || '';
-
-    if (!file) {
-      return { success: false, error: 'No se subió ningún archivo' };
+    if (!url) {
+      return { success: false, error: 'No se recibió la URL del archivo' };
     }
 
-    const bytes = await file.arrayBuffer();
+    // Download the file from Vercel Blob into memory
+    const res = await fetch(url);
+    const bytes = await res.arrayBuffer();
     const buffer = Buffer.from(bytes);
+    const sourceUrl = url;
 
-    // Create uploads directory if it doesn't exist
-    const uploadDir = join(process.cwd(), 'public', 'uploads');
-    try {
-      await mkdir(uploadDir, { recursive: true });
-    } catch {}
-
-    // Clean file name to prevent path traversal
-    const safeFileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-    const filePath = join(uploadDir, safeFileName);
-    
-    // Save file locally
-    await writeFile(filePath, buffer);
-    const sourceUrl = `/uploads/${safeFileName}`;
-
-    let documentTitle = file.name;
+    let documentTitle = fileName;
     let fileContent = '';
     let sourceType = 'file';
 
-    const fileExtension = file.name.split('.').pop()?.toLowerCase();
+    const fileExtension = fileName.split('.').pop()?.toLowerCase();
 
     if (fileExtension === 'pdf') {
       sourceType = 'pdf';
@@ -48,25 +35,25 @@ export async function uploadFileAction(formData: FormData) {
         console.error('Error parsing PDF:', err);
         // Fallback to storing the file with its description instead of failing
         fileContent = description 
-          ? `Documento PDF: ${file.name}\n\nDescripción: ${description}` 
-          : `Documento PDF subido: ${file.name}. (El contenido no pudo ser extraído textualmente, pero el archivo está enlazado).`;
+          ? `Documento PDF: ${fileName}\n\nDescripción: ${description}` 
+          : `Documento PDF subido: ${fileName}. (El contenido no pudo ser extraído textualmente, pero el archivo está enlazado).`;
       }
     } else if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'img'].includes(fileExtension || '')) {
       sourceType = 'image';
       fileContent = description 
-        ? `Imagen: ${file.name}\n\nDescripción: ${description}` 
-        : `Archivo de imagen subido: ${file.name}. (La IA usará la imagen como referencia si se solicita).`;
+        ? `Imagen: ${fileName}\n\nDescripción: ${description}` 
+        : `Archivo de imagen subido: ${fileName}. (La IA usará la imagen como referencia si se solicita).`;
     } else {
       // Default to reading it as plain text if it is text-like
       try {
         fileContent = buffer.toString('utf-8');
       } catch {
-        fileContent = description || `Archivo subido: ${file.name}`;
+        fileContent = description || `Archivo subido: ${fileName}`;
       }
     }
 
     if (!fileContent.trim()) {
-      fileContent = description || `Contenido de archivo subido: ${file.name}`;
+      fileContent = description || `Contenido de archivo subido: ${fileName}`;
     }
 
     // Chunk text

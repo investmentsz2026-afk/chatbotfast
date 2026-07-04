@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { KnowledgeDocumentData } from '@/types';
 import dynamic from 'next/dynamic';
 import ThemeToggle from '@/components/chat/ThemeToggle';
-import { uploadFileAction } from './actions';
+import { processUploadedFileAction } from './actions';
+import { upload } from '@vercel/blob/client';
 import styles from './admin.module.css';
 
 // Separate content component to wrap in dynamic import with ssr: false
@@ -140,11 +141,14 @@ function AdminPageContent() {
           return;
         }
 
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('description', description);
+        // 1. Upload to Vercel Blob directly from the browser (bypasses Vercel 4.5MB limit)
+        const newBlob = await upload(file.name, file, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+        });
 
-        const data = await uploadFileAction(formData);
+        // 2. Call the server action with the blob URL to process the PDF and save to DB
+        const data = await processUploadedFileAction(newBlob.url, file.name, description);
 
         if (data.success) {
           setMessage({
