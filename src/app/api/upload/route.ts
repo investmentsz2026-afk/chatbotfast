@@ -13,6 +13,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       onBeforeGenerateToken: async (pathname) => {
         // Allow public uploads of PDFs and images
         return {
+          addRandomSuffix: true,
           tokenPayload: JSON.stringify({
             // optional metadata
           }),
