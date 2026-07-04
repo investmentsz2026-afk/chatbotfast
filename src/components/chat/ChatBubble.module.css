@@ -1,0 +1,148 @@
+.container {
+  display: flex;
+  gap: var(--space-sm);
+  padding: 0 var(--space-md);
+  max-width: 100%;
+}
+
+.bot {
+  justify-content: flex-start;
+}
+
+.user {
+  justify-content: flex-end;
+}
+
+/* Avatar */
+.avatarCol {
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.75rem;
+}
+
+/* Bubble */
+.bubble {
+  max-width: 75%;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-lg);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.bubbleBot {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-top-left-radius: var(--space-xs);
+  color: var(--text-primary);
+}
+
+.bubbleUser {
+  background: var(--gradient-primary);
+  color: white;
+  border-top-right-radius: var(--space-xs);
+}
+
+/* Markdown */
+.markdownContent p {
+  margin: 0;
+}
+
+.markdownContent p + p {
+  margin-top: var(--space-sm);
+}
+
+.markdownContent strong {
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+.markdownContent ul,
+.markdownContent ol {
+  margin: var(--space-sm) 0;
+  padding-left: var(--space-lg);
+}
+
+.markdownContent li {
+  margin-bottom: var(--space-xs);
+}
+
+.markdownContent code {
+  background: rgba(99, 102, 241, 0.15);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-family: var(--font-mono);
+}
+
+.markdownContent a {
+  color: var(--accent-tertiary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.markdownContent a:hover {
+  color: var(--accent-primary);
+}
+
+/* Streaming cursor */
+.cursor {
+  display: inline-block;
+  color: var(--accent-primary);
+  animation: blink 0.8s step-end infinite;
+  margin-left: 2px;
+  font-size: 0.85em;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  height: 24px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  animation: typing-dot 1.2s ease-in-out infinite;
+}
+
+@keyframes typing-dot {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .bubble {
+    max-width: 85%;
+    font-size: 0.85rem;
+  }
+
+  .container {
+    padding: 0 var(--space-sm);
+  }
+}
