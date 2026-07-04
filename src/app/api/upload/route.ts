@@ -11,7 +11,6 @@ export async function POST(request: Request): Promise<NextResponse> {
       onBeforeGenerateToken: async (pathname) => {
         // Allow public uploads of PDFs and images
         return {
-          allowedContentTypes: ['application/pdf', 'image/jpeg', 'image/png', 'image/webp'],
           tokenPayload: JSON.stringify({
             // optional metadata
           }),
@@ -24,8 +23,13 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     return NextResponse.json(jsonResponse);
   } catch (error) {
+    console.error('Vercel Blob Error:', error);
     return NextResponse.json(
-      { error: (error as Error).message },
+      { 
+        error: (error as Error).message, 
+        name: (error as Error).name,
+        stack: (error as Error).stack 
+      },
       { status: 400 }
     );
   }
