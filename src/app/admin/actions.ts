@@ -1,10 +1,7 @@
 'use server';
 
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
 import prisma from '@/lib/prisma';
 import * as pdf from 'pdf-parse';
-import { put } from '@vercel/blob';
 
 export async function processUploadedFileAction(url: string, fileName: string, description: string) {
   try {
