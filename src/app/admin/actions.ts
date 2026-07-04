@@ -8,13 +8,15 @@ if (typeof global !== 'undefined') {
 }
 
 import prisma from '@/lib/prisma';
-import * as pdf from 'pdf-parse';
 
 export async function processUploadedFileAction(url: string, fileName: string, description: string) {
   try {
     if (!url) {
       return { success: false, error: 'No se recibió la URL del archivo' };
     }
+
+    // Dynamic import to guarantee polyfill is executed first
+    const pdf = await import('pdf-parse');
 
     // Download the file from Vercel Blob into memory
     const res = await fetch(url);
