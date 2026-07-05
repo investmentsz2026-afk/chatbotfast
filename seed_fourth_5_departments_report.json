@@ -1,0 +1,205 @@
+{
+  "resumen": {
+    "comisariasInsertadas": 173,
+    "comisariasExistentes": 0,
+    "distritosConComisarias": 134,
+    "distritosSinComisarias": 39
+  },
+  "distritosSinComisarias": [
+    {
+      "distrito": "Balsapuerto",
+      "provincia": "Alto Amazonas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Barranca",
+      "provincia": "Alto Amazonas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Cahuapanas",
+      "provincia": "Alto Amazonas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Jeberos",
+      "provincia": "Alto Amazonas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Manseriche",
+      "provincia": "Alto Amazonas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Morona",
+      "provincia": "Alto Amazonas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Pastaza",
+      "provincia": "Alto Amazonas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Santa Cruz",
+      "provincia": "Alto Amazonas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Teniente Cesar Lopez Rojas",
+      "provincia": "Alto Amazonas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Yavari",
+      "provincia": "Mariscal Ramon Castilla",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Putumayo",
+      "provincia": "Maynas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "San Juan Bautista",
+      "provincia": "Maynas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Yaquerana",
+      "provincia": "Maynas",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Maquia",
+      "provincia": "Requena",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Yaquerana",
+      "provincia": "Requena",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Inahuaya",
+      "provincia": "Ucayali",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Padre Marquez",
+      "provincia": "Ucayali",
+      "departamento": "Loreto"
+    },
+    {
+      "distrito": "Fitzcarrald",
+      "provincia": "Manu",
+      "departamento": "Madre de Dios"
+    },
+    {
+      "distrito": "Iqapari",
+      "provincia": "Tahuamanu",
+      "departamento": "Madre de Dios"
+    },
+    {
+      "distrito": "Tahuamanu",
+      "provincia": "Tahuamanu",
+      "departamento": "Madre de Dios"
+    },
+    {
+      "distrito": "Coalaque",
+      "provincia": "General Sanchez Cerro",
+      "departamento": "Moquegua"
+    },
+    {
+      "distrito": "Ichuqa",
+      "provincia": "General Sanchez Cerro",
+      "departamento": "Moquegua"
+    },
+    {
+      "distrito": "La Capilla",
+      "provincia": "General Sanchez Cerro",
+      "departamento": "Moquegua"
+    },
+    {
+      "distrito": "Matalaque",
+      "provincia": "General Sanchez Cerro",
+      "departamento": "Moquegua"
+    },
+    {
+      "distrito": "Yunga",
+      "provincia": "General Sanchez Cerro",
+      "departamento": "Moquegua"
+    },
+    {
+      "distrito": "Cuchumbaya",
+      "provincia": "Mariscal Nieto",
+      "departamento": "Moquegua"
+    },
+    {
+      "distrito": "San Pedro de Pillao",
+      "provincia": "Daniel Alcides Carrion",
+      "departamento": "Pasco"
+    },
+    {
+      "distrito": "Tapuc",
+      "provincia": "Daniel Alcides Carrion",
+      "departamento": "Pasco"
+    },
+    {
+      "distrito": "Vilcabamba",
+      "provincia": "Daniel Alcides Carrion",
+      "departamento": "Pasco"
+    },
+    {
+      "distrito": "Chontabamba",
+      "provincia": "Oxapampa",
+      "departamento": "Pasco"
+    },
+    {
+      "distrito": "Ninacaca",
+      "provincia": "Pasco",
+      "departamento": "Pasco"
+    },
+    {
+      "distrito": "Pallanchacra",
+      "provincia": "Pasco",
+      "departamento": "Pasco"
+    },
+    {
+      "distrito": "San Fco.De Asis de Yarusyacan",
+      "provincia": "Pasco",
+      "departamento": "Pasco"
+    },
+    {
+      "distrito": "Lalaquiz",
+      "provincia": "Huancabamba",
+      "departamento": "Piura"
+    },
+    {
+      "distrito": "Arenal",
+      "provincia": "Paita",
+      "departamento": "Piura"
+    },
+    {
+      "distrito": "El Tallan",
+      "provincia": "Piura",
+      "departamento": "Piura"
+    },
+    {
+      "distrito": "Cristo Nos Valga",
+      "provincia": "Sechura",
+      "departamento": "Piura"
+    },
+    {
+      "distrito": "Lobitos",
+      "provincia": "Talara",
+      "departamento": "Piura"
+    },
+    {
+      "distrito": "Pariqas",
+      "provincia": "Talara",
+      "departamento": "Piura"
+    }
+  ]
+}

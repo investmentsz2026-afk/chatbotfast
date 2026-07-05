@@ -25,6 +25,11 @@ export default function ChatInterface() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const handleQuickExit = useCallback(() => {
+    // Mask user activity immediately by replacing browser history with google.com
+    window.location.replace('https://www.google.com');
+  }, []);
+
   const { messages, sendMessage, status, setMessages } = useChat({
     transport: new DefaultChatTransport({
       api: '/api/chat',
@@ -166,9 +171,6 @@ export default function ChatInterface() {
           },
         ]);
       } else {
-        const query = `comisaria ${dist.name} ${conversationState.provinceName || ''} ${conversationState.departmentName || ''}`;
-        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-        
         setMessages((prev) => [
           ...prev,
           {
@@ -176,7 +178,7 @@ export default function ChatInterface() {
             role: 'assistant',
             parts: [{ 
               type: 'text', 
-              text: `No tengo comisarías en mi base de datos para **${dist.name}**, pero he generado una búsqueda para ti:\n\n🗺️ **[Ver comisarías en ${dist.name} usando Google Maps](${mapsUrl})**\n\nTambién te recomiendo tener a la mano estos números de emergencia:\n📞 Llama a la **Línea 100** (gratuita las 24 horas)\n📞 O al **105** (Central PNP)` 
+              text: `No he encontrado dependencias policiales físicas registradas en **${dist.name}** en nuestra base de datos.\n\nTe sugerimos recurrir a la comisaría de tu capital de provincia o comunicarte de inmediato con los números de ayuda y emergencia del Estado:\n\n📞 **Línea 100** (Orientación y ayuda gratuita las 24 horas)\n📞 **Central 105** (Emergencias de la Policía Nacional)` 
             }],
           },
         ]);
@@ -292,6 +294,19 @@ export default function ChatInterface() {
           </div>
         </div>
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <button 
+            onClick={handleQuickExit} 
+            className={styles.exitButton} 
+            title="Salir rápidamente de la aplicación" 
+            id="btn-quick-exit"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <line x1="9" y1="9" x2="15" y2="15"/>
+              <line x1="15" y1="9" x2="9" y2="15"/>
+            </svg>
+            <span>Salida Rápida</span>
+          </button>
           <ThemeToggle />
           <a href="/admin" className={styles.adminButton} title="Panel de Administración" id="btn-header-admin">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">

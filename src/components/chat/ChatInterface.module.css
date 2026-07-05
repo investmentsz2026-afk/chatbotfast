@@ -48,6 +48,33 @@
   flex-shrink: 0;
 }
 
+.exitButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.exitButton:hover {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+  transform: translateY(-1px);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+.exitButton:active {
+  transform: translateY(0);
+}
+
 
 .headerContent {
   display: flex;
