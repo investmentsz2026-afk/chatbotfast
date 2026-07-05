@@ -275,7 +275,7 @@
 
   .footerBottom {
     flex-direction: column-reverse;
-    align-items: stretch;
+    align-items: center;
     gap: var(--space-sm);
     margin-top: var(--space-sm);
   }
@@ -286,8 +286,8 @@
   }
 
   .exitButtonBottom {
-    padding: 10px 14px;
-    font-size: 0.85rem;
-    width: 100%;
+    padding: 8px 20px;
+    font-size: 0.82rem;
+    width: auto;
   }
 }
