@@ -294,19 +294,6 @@ export default function ChatInterface() {
           </div>
         </div>
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-          <button 
-            onClick={handleQuickExit} 
-            className={styles.exitButton} 
-            title="Salir rápidamente de la aplicación" 
-            id="btn-quick-exit"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-              <line x1="9" y1="9" x2="15" y2="15"/>
-              <line x1="15" y1="9" x2="9" y2="15"/>
-            </svg>
-            <span>Salida Rápida</span>
-          </button>
           <ThemeToggle />
           <a href="/admin" className={styles.adminButton} title="Panel de Administración" id="btn-header-admin">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -402,9 +389,24 @@ export default function ChatInterface() {
             </svg>
           </button>
         </form>
-        <p className={styles.disclaimer}>
-          Las respuestas se basan en la información proporcionada. En caso de emergencia, llama al <strong>105</strong>.
-        </p>
+        <div className={styles.footerBottom}>
+          <p className={styles.disclaimer}>
+            Las respuestas se basan en la información proporcionada. En caso de emergencia, llama al <strong>105</strong>.
+          </p>
+          <button 
+            onClick={handleQuickExit} 
+            className={styles.exitButtonBottom}
+            title="Salir rápidamente de la aplicación" 
+            id="btn-quick-exit"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <line x1="9" y1="9" x2="15" y2="15"/>
+              <line x1="15" y1="9" x2="9" y2="15"/>
+            </svg>
+            <span>Salida Rápida</span>
+          </button>
+        </div>
       </footer>
     </div>
   );
